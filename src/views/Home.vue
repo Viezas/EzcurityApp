@@ -2,28 +2,34 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Blank</ion-title>
+        <ion-title>Ezcurity</ion-title>
       </ion-toolbar>
     </ion-header>
     
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
+          <ion-title size="large">Ezcurity</ion-title>
         </ion-toolbar>
       </ion-header>
-    
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      
+      <div id="container mt-96">
+        <Nav />
+        <Services />
+        <Promises />
+        <Footer />
       </div>
     </ion-content>
   </ion-page>
 </template>
 
-<script lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+<script>
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/vue';
 import { defineComponent } from 'vue';
+import Nav from '../components/_partials/Nav.vue'
+import Footer from '../components/_partials/Footer.vue'
+import Services from '../components/Services.vue'
+import Promises from '../components/Promises.vue'
 
 export default defineComponent({
   name: 'Home',
@@ -32,8 +38,12 @@ export default defineComponent({
     IonHeader,
     IonPage,
     IonTitle,
-    IonToolbar
-  }
+    IonToolbar,
+    Nav,
+    Services,
+    Promises,
+    Footer
+  },
 });
 </script>
 
