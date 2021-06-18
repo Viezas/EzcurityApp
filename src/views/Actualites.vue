@@ -18,14 +18,14 @@
         <div class="bg-white py-5">
           <p class="text-center text-blue-600 text-3xl pt-10 mb-10">Actualités</p>
 
-          <router-link :to="{ name : 'Actualite', params: { id: 1 } }">
+          <router-link :to="{ name : 'Actualite', params: { id: article.id } }" v-for="article in news" :key="article.id">
             <ion-card class="mb-5 bg-white border-2 border-gray-300">
               <ion-card-header>
-                <ion-card-subtitle class="flex items-center justify-center"><img src="/assets/img/services/cctv-camera.png" alt="Camera services" class="h-20"></ion-card-subtitle>
-                <ion-card-title class="text-blue-600 text-center">Système de vidéosurveillance</ion-card-title>
+                <ion-card-subtitle class="flex items-center justify-center"><img :src="article.img_url" alt="Camera services" class="h-20"></ion-card-subtitle>
+                <ion-card-title class="text-blue-600 text-center">{{ article.title }}</ion-card-title>
               </ion-card-header>
               <ion-card-content class="text-center">
-                Nous sommes heureux de vous annoncer qu'à compté de ce jour, Ezcurity met à votre disposition des appareils de vidéosurveillance !
+                {{ article.body.substring(0, 150) }}              
               </ion-card-content>
             </ion-card>
           </router-link>
@@ -45,6 +45,12 @@ import Footer from '../components/_partials/Footer.vue'
 
 export default defineComponent({
   name: 'Actualites',
+  data(){
+    return {
+      news : []
+    }
+  },
+
   components: {
     IonContent,
     IonHeader,
@@ -59,5 +65,14 @@ export default defineComponent({
     Nav,
     Footer
   },
+
+  mounted(){
+    fetch(`http://127.0.0.1:8000/api/posts`)
+    .then(response => response.json())
+    .then(data => {
+      this.news = data[0]
+    })
+    .catch(error => {console.log('error : ', error)})
+  }
 });
 </script>

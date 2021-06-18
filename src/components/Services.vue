@@ -2,7 +2,7 @@
   <div class="bg-white pb-20"> 
     <p class="text-3xl text-blue-600 pt-5 mb-10 text-center"><span class="border-b border-gray-600">Nos services</span></p>
 
-    <router-link :to="{ name : 'Service', params: { service: 'Detecteur'} }">
+    <router-link :to="{ name : 'Camera' }">
       <ion-card class="mb-5 bg-white border-2 border-gray-300">
         <ion-card-header>
           <ion-card-subtitle class="flex items-center justify-center"><img src="/assets/img/services/cctv-camera.png" alt="Camera services" class="h-20"></ion-card-subtitle>
@@ -14,7 +14,7 @@
       </ion-card>
     </router-link>
 
-    <router-link :to="{ name : 'Service', params: { service: 'Detecteur'} }">
+    <router-link :to="{ name : 'Alarm' }">
       <ion-card class="mb-5 bg-white border-2 border-gray-300">
         <ion-card-header>
           <ion-card-subtitle class="flex items-center justify-center"><img src="/assets/img/services/alert.png" alt="Alert services" class="h-20"></ion-card-subtitle>
@@ -26,7 +26,7 @@
       </ion-card>
     </router-link>
 
-    <router-link :to="{ name : 'Service', params: { service: 'Detecteur'} }">
+    <router-link :to="{ name : 'Keycard' }">
       <ion-card class="mb-5 bg-white border-2 border-gray-300">
         <ion-card-header>
           <ion-card-subtitle class="flex items-center justify-center"><img src="/assets/img/services/keycard.png" alt="Keycard services" class="h-20"></ion-card-subtitle>
@@ -38,7 +38,7 @@
       </ion-card>
     </router-link>
 
-    <router-link :to="{ name : 'Service', params: { service: 'Detecteur'} }">
+    <router-link :to="{ name : 'Biometric' }">
       <ion-card class="mb-5 bg-white border-2 border-gray-300">
         <ion-card-header>
           <ion-card-subtitle class="flex items-center justify-center"><img src="/assets/img/services/eye-recognition.png" alt="Biometric services" class="h-20"></ion-card-subtitle>
@@ -50,7 +50,7 @@
       </ion-card>
     </router-link>
 
-    <router-link :to="{ name : 'Service', params: { service: 'Detecteur'} }">
+    <router-link :to="{ name : 'Sensor' }">
       <ion-card class="mb-5 bg-white border-2 border-gray-300" bg-white>
         <ion-card-header>
           <ion-card-subtitle class="flex items-center justify-center"><img src="/assets/img/services/sensor.png" alt="Sensor services" class="h-20"></ion-card-subtitle>
@@ -62,7 +62,7 @@
       </ion-card>
     </router-link>
 
-    <router-link :to="{ name : 'Service', params: { service: 'Detecteur'} }">
+    <router-link :to="{ name : 'App' }">
       <ion-card class="bg-white border-2 border-gray-300">
         <ion-card-header>
           <ion-card-subtitle class="flex items-center justify-center"><img src="/assets/img/services/cell-phone.png" alt="Sensor services" class="h-20"></ion-card-subtitle>

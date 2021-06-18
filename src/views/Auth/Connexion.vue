@@ -39,8 +39,8 @@
 <script>
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/vue';
 import { defineComponent } from 'vue';
-import Nav from '../components/_partials/Nav.vue'
-import Footer from '../components/_partials/Footer.vue'
+import Nav from '../../components/_partials/Nav.vue'
+import Footer from '../../components/_partials/Footer.vue'
 
 export default defineComponent({
   name: 'Connexion',

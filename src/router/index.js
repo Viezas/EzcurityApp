@@ -1,13 +1,18 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import Home from '../views/Home.vue'
-import Service from '../views/Service.vue'
+import Camera from '../views/Services/Camera.vue'
+import Alarm from '../views/Services/Alarm.vue'
+import Keycard from '../views/Services/Keycard.vue'
+import Biometric from '../views/Services/Biometric.vue'
+import Sensor from '../views/Services/Sensor.vue'
+import App from '../views/Services/App.vue'
 import Paiement from '../views/Paiement.vue'
 import Paiee from '../views/Paiee.vue'
 import Actualites from '../views/Actualites.vue'
 import Actualite from '../views/Actualite.vue'
 import Contact from '../views/Contact.vue'
-import Connexion from '../views/Connexion.vue'
-import Inscription from '../views/Inscription.vue'
+import Connexion from '../views/Auth/Connexion.vue'
+import Inscription from '../views/Auth/Inscription.vue'
 import Profile from '../views/Profile.vue'
 import Abonnement from '../views/Abonnement.vue'
 import Facturations from '../views/Facturations.vue'
@@ -23,10 +28,34 @@ const routes = [
     component: Home
   },
   {
-    path: '/service',
-    name: 'Service',
-    component: Service,
-    props : true
+    path: '/camera',
+    name: 'Camera',
+    component: Camera
+  },
+  {
+    path: '/alarm',
+    name: 'Alarm',
+    component: Alarm
+  },
+  {
+    path: '/keycard',
+    name: 'Keycard',
+    component: Keycard
+  },
+  {
+    path: '/biometric',
+    name: 'Biometric',
+    component: Biometric
+  },
+  {
+    path: '/sensor',
+    name: 'Sensor',
+    component: Sensor
+  },
+  {
+    path: '/app',
+    name: 'App',
+    component: App
   },
   {
     path: '/subscribe',
@@ -47,8 +76,7 @@ const routes = [
   {
     path: '/news/:id',
     name: 'Actualite',
-    component: Actualite,
-    props: true
+    component: Actualite
   },
   {
     path: '/contact',
