@@ -6,7 +6,11 @@
         <img src="/assets/img/logo.png" alt="Link to homepage" class="h-10">
       </router-link>
 
-      <router-link :to="{ name : 'Connexion' }">
+      <router-link :to="{ name : 'Connexion' }" v-if="!user.token">
+        <img src="/assets/img/account.png" alt="Link to account" class="h-10">
+      </router-link>
+
+      <router-link :to="{ name : 'Profile' }" v-else>
         <img src="/assets/img/account.png" alt="Link to account" class="h-10">
       </router-link>
     </div>
@@ -22,8 +26,15 @@
 
 <script>
 import { defineComponent } from 'vue';
+import {mapGetters} from 'vuex'
 
 export default defineComponent({
   name: 'Nav',
+
+  computed : {
+    ...mapGetters({
+      user : 'user'
+    })
+  }
 });
 </script>

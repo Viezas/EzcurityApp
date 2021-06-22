@@ -17,6 +17,10 @@
         <Nav />
           <div class="bg-white text-black py-5">
 
+            <div class="w-full mb-5 bg-red-600 py-2 text-white text-center" v-if="error">
+              {{ error }}
+            </div>
+
             <form @submit.prevent="handleSubmit" class="flex justify-center items-center flex-wrap py-6 mb-10">
               <div class="w-5/6 mb-5">
                 <label for="name">Nom d'utilisateur<span class="text-red-600">*</span></label><br>
@@ -51,17 +55,20 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/vue'
 import { defineComponent } from 'vue';
 import Nav from '../../components/_partials/Nav.vue'
 import Footer from '../../components/_partials/Footer.vue'
+import { mapActions } from "vuex"
 
 export default defineComponent({
   name: 'Inscription',
   data(){
     return {
       form : {
-        'name' : '',
-        'password' : '',
-        'email' : '',
-        'phone' : ''
-      }
+        name : '',
+        password : '',
+        email : '',
+        phone : ''
+      },
+      error : '',
+      message : ''
     }
   },
 
@@ -76,8 +83,33 @@ export default defineComponent({
   },
 
   methods : {
+    ...mapActions({
+      addUser : "addUser"
+    }),
+    
     handleSubmit(){
-      this.$router.push({ name: 'Profile' });
+      let init = {
+        method : 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(this.form)
+      }
+
+      fetch(`https://ezcurity.herokuapp.com/api/auth/register`, init)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (!data.token) {
+          if (data.errors) {
+            return this.error = data.errors[Object.keys(data.errors)[0]]
+          }
+          return this.error = data.message
+        }
+        this.addUser(data)
+        this.$router.push({name : 'Profile'})
+      })
     }
   }
 });

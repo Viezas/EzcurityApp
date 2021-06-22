@@ -67,7 +67,7 @@ export default defineComponent({
   },
 
   mounted(){
-    fetch(`http://127.0.0.1:8000/api/posts`)
+    fetch(`https://ezcurity.herokuapp.com/api/posts`)
     .then(response => response.json())
     .then(data => {
       this.news = data[0]

@@ -20,12 +20,6 @@
             <ion-card-header>
               <ion-card-title class="text-green-600 text-center">Paiement effectué !</ion-card-title>
             </ion-card-header>
-            <ion-card-content class="text-center">
-              Montant : 40€/mois<br>
-              Date de l'abonnement : dd/mm/yy<br>
-              4 derniers chiffres de la cb : 1234<br> 
-              Renouvellement le : dd/mm/yy
-            </ion-card-content>
           </ion-card>
         </div>
         <Footer />
@@ -35,7 +29,7 @@
 </template>
 
 <script>
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardContent, IonCardTitle} from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle} from '@ionic/vue';
 import { defineComponent } from 'vue';
 import Nav from '../components/_partials/Nav.vue'
 import Footer from '../components/_partials/Footer.vue'
@@ -49,7 +43,6 @@ export default defineComponent({
     IonTitle,
     IonToolbar,IonCard, 
     IonCardHeader, 
-    IonCardContent, 
     IonCardTitle,
     Nav,
     Footer

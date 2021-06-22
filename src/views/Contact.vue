@@ -36,7 +36,7 @@
             <ion-card-header>
               <ion-card-title class="text-blue-600 text-center">Nous contacter</ion-card-title>
               <ion-card-subtitle class="bg-red-600 py-2 text-white text-center" v-if="error">{{ error }}</ion-card-subtitle>
-              <ion-card-subtitle class="bg-red-600 py-2 text-white text-center" v-else-if="message">{{ message }}</ion-card-subtitle>
+              <ion-card-subtitle class="bg-green-600 py-2 text-white text-center" v-else-if="message">{{ message }}</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
               <form @submit.prevent="handleSubmit">
@@ -88,6 +88,8 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardH
 import { defineComponent } from 'vue';
 import Nav from '../components/_partials/Nav.vue'
 import Footer from '../components/_partials/Footer.vue'
+import {mapGetters} from 'vuex'
+
 
 export default defineComponent({
   name: 'Contact',
@@ -103,6 +105,12 @@ export default defineComponent({
       message : '',
       error : ''
     }
+  },
+  
+  computed : {
+     ...mapGetters({
+      user : 'user'
+    })
   },
   
   components: {
@@ -130,16 +138,23 @@ export default defineComponent({
         body : JSON.stringify(this.form)
       }
 
-      fetch(`http://127.0.0.1:8000/api/contact`, init)
+      fetch(`https://ezcurity.herokuapp.com/api/contact`, init)
       .then(response => response.json())
       .then(data => {
         console.log(data);
         if (data.errors) {
           return this.error = data.errors[Object.keys(data.errors)[0]]
         }
+
         this.error = ""
-        this.form = []
-        return this.message = "Votre email a été envoyé !"
+        this.form = {
+          email : '',
+          last_name : '',
+          first_name : '',
+          object : '',
+          body : ''
+        }
+        return this.message = data.message
       })
     }
   }

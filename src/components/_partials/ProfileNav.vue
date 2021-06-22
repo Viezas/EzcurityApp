@@ -5,10 +5,7 @@
       <router-link :to="{ name : 'Home' }">
         <img src="/assets/img/logo.png" alt="Link to homepage" class="h-10">
       </router-link>
-
-      <router-link :to="{ name : 'Connexion' }">
-        <img src="/assets/img/account.png" alt="Link to account" class="h-10">
-      </router-link>
+      
     </div>
     <div class="mt-2 pb-5 text-lg px-2" id="mobileMenu">
     <ul>

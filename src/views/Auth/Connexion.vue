@@ -17,6 +17,10 @@
         <Nav />
           <div class="bg-white text-black h-96">
             <form @submit.prevent="handleSubmit" class="flex justify-center items-center flex-wrap py-6">
+              <div class="w-full mb-5 bg-red-600 py-2 text-white text-center" v-if="error">
+                {{ error }}
+              </div>
+
               <div class="w-5/6 mb-5">
                 <label for="email">Email<span class="text-red-600">*</span></label><br>
                 <input type="text" name="email" id="email" class="border border-gray-600 w-full px-1 bg-white" autofocus required v-model="form.email">
@@ -41,6 +45,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/vue'
 import { defineComponent } from 'vue';
 import Nav from '../../components/_partials/Nav.vue'
 import Footer from '../../components/_partials/Footer.vue'
+import { mapActions } from "vuex"
 
 export default defineComponent({
   name: 'Connexion',
@@ -49,7 +54,8 @@ export default defineComponent({
       form : {
         'email' : '',
         'password' : ''
-      }
+      },
+      error : ''
     }
   },
 
@@ -64,8 +70,29 @@ export default defineComponent({
   },
 
    methods : {
+    ...mapActions({
+      addUser : "addUser"
+    }),
+
     handleSubmit(){
-      this.$router.push({ name: 'Profile' });
+      let init = {
+        method : 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(this.form)
+      }
+
+      fetch(`https://ezcurity.herokuapp.com/api/auth/login`, init)
+      .then(response => response.json())
+      .then(data => {
+        if (!data.token) {
+          return this.error = data.error
+        }
+        this.addUser(data)
+        this.$router.push({name : 'Profile'})
+      })
     }
   }
 });

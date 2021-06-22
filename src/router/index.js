@@ -16,6 +16,8 @@ import Inscription from '../views/Auth/Inscription.vue'
 import Profile from '../views/Profile.vue'
 import Abonnement from '../views/Abonnement.vue'
 import Facturations from '../views/Facturations.vue'
+import store from '@/store'
+
 
 const routes = [
   {
@@ -61,12 +63,26 @@ const routes = [
     path: '/subscribe',
     name: 'Paiement',
     component: Paiement,
-    props : true
+    props : true,
+    beforeEnter: (to, from, next) => {
+      if(!store.getters.user.token)
+      {
+        return next({name : 'Connexion'})
+      }
+      next()
+    }
   },
   {
     path: '/subscribed',
     name: 'Paiee',
     component: Paiee,
+    beforeEnter: (to, from, next) => {
+      if(!store.getters.user.token)
+      {
+        return next({name : 'Connexion'})
+      }
+      next()
+    }
   },
   {
     path: '/news',
@@ -96,17 +112,38 @@ const routes = [
   {
     path: '/profile',
     name: 'Profile',
-    component: Profile
+    component: Profile,
+    beforeEnter: (to, from, next) => {
+      if(!store.getters.user.token)
+      {
+        return next({name : 'Connexion'})
+      }
+      next()
+    }
   },
   {
     path: '/profile/subscriptions',
     name: 'Abonnement',
-    component: Abonnement
+    component: Abonnement,
+    beforeEnter: (to, from, next) => {
+      if(!store.getters.user.token)
+      {
+        return next({name : 'Connexion'})
+      }
+      next()
+    }
   },
   {
     path: '/profile/billing',
     name: 'Facturations',
-    component: Facturations
+    component: Facturations,
+    beforeEnter: (to, from, next) => {
+      if(!store.getters.user.token)
+      {
+        return next({name : 'Connexion'})
+      }
+      next()
+    }
   },
   {
     path: '/:catchAll(.*)',

@@ -84,7 +84,7 @@ export default defineComponent({
   },
 
   mounted () {
-    fetch(`http://127.0.0.1:8000/api/plans/alarm`)
+    fetch(`https://ezcurity.herokuapp.com/api/plans/alarm`)
     .then(response => response.json())
     .then(data => {
       if(!data.success === true){

@@ -15,43 +15,17 @@
       
       <div id="container mt-96">
         <Nav />
-        <div class="bg-white py-5 text-black">
+        <div class="bg-white py-5 text-black border border-gray-600">
           <div class="py-6 px-2">
             <div class="mb-6">
               <p class="text-blue-600 text-3xl text-center">Mes abonnements</p>
             </div>
 
-            <div class="border-b-2 border-blue-600 flex items-center justify-between mb-5">
-              <p>Détecteur de fumée (ZGMF-P07)</p>
-              <div class="flex items-center justify-between w-1/5">
-                <a href="">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="orange">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </a>
-                <a href="">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="red">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </a>
-              </div>
+            <div class="flex items-center justify-center text-xl">
+              <a :href="url" v-if="url.length != 0">Voir mes abonements</a>
             </div>
-
-            <div class="border-b-2 border-blue-600 flex items-center justify-between mb-5">
-              <p>Détecteur de mouvement (DMVC-745B)</p>
-              <div class="flex items-center justify-between w-1/5">
-                <a href="">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="blue">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </a>
-                <a href="">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="red">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </a>
-              </div>
+            <div v-if="url.length == 0">
+              <p>Patientez quelques instants, génération du lien en cours ...</p>
             </div>
           </div>
         </div>
@@ -59,16 +33,23 @@
       </div>
     </ion-content>
   </ion-page>
-</template>
+</template> 
 
 <script>
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/vue';
 import { defineComponent } from 'vue';
 import Nav from '../components/_partials/ProfileNav.vue'
 import Footer from '../components/_partials/Footer.vue'
+import { mapGetters } from 'vuex'
 
 export default defineComponent({
   name: 'Abonnement',
+
+  data(){
+    return {
+      url : ''
+    }
+  },
 
   components: {
     IonContent,
@@ -78,6 +59,29 @@ export default defineComponent({
     IonToolbar,
     Nav,
     Footer
+  },
+
+  computed : {
+    ...mapGetters({
+      user : 'user'
+    })
+  },
+
+  mounted(){
+    let init = {
+      method : 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + this.user.token,
+        'Content-Type': 'application/json'
+      },
+    }
+    fetch("https://ezcurity.herokuapp.com/api/billing", init)
+    .then(response => response.json())
+    .then(data => {
+      this.url = data
+    })
+    .catch(error => {console.log('error : ', error)})
   }
 });
 </script>
